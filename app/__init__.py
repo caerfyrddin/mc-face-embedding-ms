@@ -1,0 +1,9 @@
+from flask import Flask
+from app.mc_face_embedding_ms.infrastructure.delivery.rest.controllers import mc_face_embedding_ms
+from app.mc_face_embedding_ms.domain.exception.not_found_error_handler import not_found_error_handler
+from app.mc_face_embedding_ms.domain.exception.internal_server_error_error_handler import internal_server_error_error_handler
+
+app = Flask(__name__)
+app.register_blueprint(mc_face_embedding_ms)
+app.register_error_handler(404, not_found_error_handler)
+app.register_error_handler(500, internal_server_error_error_handler)
